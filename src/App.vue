@@ -1,30 +1,85 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app">
+    <div class="cell cell-map">
+      <MapContainer
+        :geojson="geojson"
+        v-on:select="selected = $event"
+      ></MapContainer>
+    </div>
+    <div class="cell cell-edit">
+      <Edit :geojson="geojson" v-on:change="geojson = $event"> </Edit>
+    </div>
+    <div class="cell cell-inspect">
+      <Inspect :feature="selected"></Inspect>
+    </div>
   </div>
-  <router-view />
 </template>
 
+<script>
+import MapContainer from "./components/MapContainer";
+import Edit from "./components/Edit";
+import Inspect from "./components/Inspect";
+
+export default {
+  name: "App",
+  components: {
+    Inspect,
+    Edit,
+    MapContainer,
+  },
+  data: () => ({
+    // this is the initial GeoJSON data
+    selected: undefined,
+    geojson: {
+      type: "Feature",
+      properties: {},
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [
+            [-27.0703125, 43.58039085560784],
+            [-28.125, 23.563987128451217],
+            [-10.8984375, 32.84267363195431],
+            [-27.0703125, 43.58039085560784],
+          ],
+        ],
+      },
+    },
+  }),
+};
+</script>
+
 <style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100vh;
+  grid-auto-rows: 1fr;
+  grid-gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
-
-#nav {
-  padding: 30px;
+.cell {
+  border-radius: 4px;
+  background-color: lightgrey;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.cell-map {
+  grid-column: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.cell-edit {
+  grid-column: 2;
+  grid-row: 1;
+}
+.cell-inspect {
+  grid-column: 2;
+  grid-row: 2;
 }
 </style>
