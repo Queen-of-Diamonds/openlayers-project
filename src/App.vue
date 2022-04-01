@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import MapContainer from "./components/MapContainer";
-import Edit from "./components/Edit";
-import Inspect from "./components/Inspect";
+import MapContainer from "@/components/MapContainer";
+import Edit from "@/components/Edit";
+import Inspect from "@/components/Inspect";
 
 export default {
   name: "App",
@@ -37,10 +37,13 @@ export default {
         type: "Polygon",
         coordinates: [
           [
-            [-27.0703125, 43.58039085560784],
-            [-28.125, 23.563987128451217],
-            [-10.8984375, 32.84267363195431],
-            [-27.0703125, 43.58039085560784],
+            [31.049999, -29.883333],
+            [77.216721, 28.6448],
+            [57.5724, -20.3104],
+            // [-27.0703125, 43.58039085560784],
+            // [-28.125, 23.563987128451217],
+            // [-10.8984375, 32.84267363195431],
+            // [-27.0703125, 43.58039085560784],
           ],
         ],
       },
